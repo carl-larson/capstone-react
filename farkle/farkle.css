@@ -1,0 +1,48 @@
+#playArea {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-template-rows: 60px 90px 90px 90px 90px 90px 90px 60px;
+    /* column-width: 100px 100px;     */
+    /* grid-template-areas:"die1 keep1"
+    "die2 keep2"
+    "die3 keep3"
+    "die4 keep4"
+    "die5 keep5"
+    "die6 keep6";
+     */
+}
+
+.one p {
+    border: 4px solid gray;
+    background: url(./dicePic.png) no-repeat 0 0;
+    width: 64px;
+    height: 64px;
+    margin: 0;
+}
+
+.two p {
+    border: 4px solid gray;
+    background: url(./dicePic.png) no-repeat 0 0;
+    width: 64px;
+    height: 64px;
+    margin: 0;
+}
+/* #die1 {
+    grid-area: die1;
+
+}
+#die2 {
+    grid-area: die2;
+}
+#die3 {
+    grid-area: die3;
+}
+#die4 {
+    grid-area: die4;
+}
+#die5 {
+    grid-area: die5;
+}
+#die6 {
+    grid-area: die6;
+} */

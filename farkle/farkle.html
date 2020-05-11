@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./farkle.css">
+    <title>Farkle</title>
+</head>
+<body>
+    <h3>Player <span id="player">1</span>'s turn</h3>
+    <button onclick="rollDice()">Roll</button>
+    <button onclick="passDice()">Score and Pass</button>
+    <div id="playArea">
+        <div>Player 1 score: <br><span id="score1">0</span></div>
+        <div>Player 2 score: <br><span id="score2">0</span></div>
+        <div class="one" id="die1" onclick="keepDie(die1)"></div>
+        <div class="two" id="keep1"></div>
+        <div class="one" id="die2" onclick="keepDie(die2)"></div>
+        <div class="two" id="keep2"></div>
+        <div class="one" id="die3" onclick="keepDie(die3)"></div>
+        <div class="two" id="keep3"></div>
+        <div class="one" id="die4" onclick="keepDie(die4)"></div>
+        <div class="two" id="keep4"></div>
+        <div class="one" id="die5" onclick="keepDie(die5)"></div>
+        <div class="two" id="keep5"></div>
+        <div class="one" id="die6" onclick="keepDie(die6)"></div>
+        <div class="two" id="keep6"></div>
+        <div id="pointLine">Current Points: <span id="points">0</span></div>
+        <div id="pointLine">Kept Points: <span id="keptPoints">0</span></div>
+    </div>
+    <script src="./farkle.js"></script>
+</body>
+</html>
