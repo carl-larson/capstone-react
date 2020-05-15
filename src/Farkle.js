@@ -11,12 +11,12 @@ class Farkle extends React.Component {
     render() {
         return (
             <div className='board'>
-                <Row className='row1'></Row>
-                <Row className='row2'></Row>
-                <Row className='row3'></Row>
-                <Row className='row4'></Row>
-                <Row className='row5'></Row>
-                <Row className='row6'></Row>
+                <Row row={1}></Row>
+                <Row className='row2' row={2}></Row>
+                <Row className='row3' row={3}></Row>
+                <Row className='row4' row={4}></Row>
+                <Row className='row5' row={5}></Row>
+                <Row className='row6' row={6}></Row>
             </div>
 
         )

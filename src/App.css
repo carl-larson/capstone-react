@@ -1,3 +1,14 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  width: 200px;
+  border: 2px solid green;
+}
+
+.row {
+  border: 2px solid black;
+}
 
 .Header {
   background-color: #282c34;
