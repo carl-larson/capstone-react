@@ -8,16 +8,25 @@
 
 .row {
   border: 2px solid black;
+  padding: 10px 0px 10px 0px;
 }
 
 .Header {
   background-color: #282c34;
   /* min-height: 1vh; */
   height: 15vh;
+  width: 100pc;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
