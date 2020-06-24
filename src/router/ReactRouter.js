@@ -4,7 +4,6 @@ import { Switch, Route, Redirect } from 'react-router'
 import Home from '../components/Home'
 import Login from '../components/Login'
 import Farkle from '../components/Farkle'
-import AddBusiness from '../containers/AddBusiness'
 
 const checkAuth = () => {
     // const cookies = cookie.parse(document.cookie)
@@ -29,7 +28,7 @@ const Router = () => {
             <Route exact path='/' component={Home} />
             <Route path='/login' component={Login} />
             {/* <Route path='/business/:id' component={Business} /> */}
-            <ProtectedRoute path='/farkle' component={AddBusiness}/>
+            <ProtectedRoute path='/farkle' component={Farkle}/>
         </Switch>
     )
 }
