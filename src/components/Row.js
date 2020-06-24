@@ -9,6 +9,7 @@ class Row extends React.Component {
     }
 
     render() {
+        let value = this.state.die1;
         // let thisDie = document.getElementById(name).firstChild;
         if (value == 1) {
             thisDie.style.backgroundPosition = '0px 0px';
@@ -29,7 +30,6 @@ class Row extends React.Component {
             thisDie.style.backgroundPosition = '-64px -128px';
         }
     
-        }
         return (
             <div className='row'>
                 <div className={`rolled${this.props.row}`}>

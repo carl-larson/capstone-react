@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import Header from './Header'
-import Farkle from './Farkle'
+import Navigation from './components/Navigation'
+import ReactRouter from './router/ReactRouter'
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Farkle />
+      <Navigation />
+      <ReactRouter />
     </div>
   );
 }
