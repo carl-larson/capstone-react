@@ -5,7 +5,7 @@ import '../App.css'
 function Login(props) {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
-    const [ error, setError ] = useState(null);
+    // const [ error, setError ] = useState(null);
     const [ loading, setLoading ] = useState(null);
     
     // handleTextChange = (e) => {
@@ -14,7 +14,7 @@ function Login(props) {
     // this.setState(state)
     // }
 
-    login = (e) => {
+    const login = (e) => {
     e.preventDefault();
     props.history.push('/');
     // document.cookie = `loggedIn=true;max-age=60*1000`;
@@ -23,7 +23,7 @@ function Login(props) {
 
     return (
         <div className="loginForm">
-            <form className="login-form" onSubmit={this.login}>
+            <form className="login-form" onSubmit={() => login()}>
             <label>Username</label>
             <input
                 onChange={e => setUsername(e.target.value)}

@@ -28,7 +28,7 @@ const Router = () => {
             <Route exact path='/' component={Home} />
             <Route path='/login' component={Login} />
             {/* <Route path='/business/:id' component={Business} /> */}
-            <ProtectedRoute path='/farkle' component={Farkle}/>
+            {/* <ProtectedRoute path='/farkle' component={Farkle}/> */}
         </Switch>
     )
 }

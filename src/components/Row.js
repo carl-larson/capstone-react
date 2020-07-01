@@ -4,30 +4,30 @@ class Row extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            die1: 1
+            value: 1
         }
     }
 
     render() {
-        let value = this.state.die1;
+        let value = this.state.value;
         // let thisDie = document.getElementById(name).firstChild;
         if (value == 1) {
-            thisDie.style.backgroundPosition = '0px 0px';
+            // thisDie.style.backgroundPosition = '0px 0px';
         }
         if (value == 2) {
-            thisDie.style.backgroundPosition = '-64px 0px';
+            // thisDie.style.backgroundPosition = '-64px 0px';
         }
         if (value == 3) {
-            thisDie.style.backgroundPosition = '0px -64px';
+            // thisDie.style.backgroundPosition = '0px -64px';
         }
         if (value == 4) {
-            thisDie.style.backgroundPosition = '-64px -64px';
+            // thisDie.style.backgroundPosition = '-64px -64px';
         }
         if (value == 5) {
-            thisDie.style.backgroundPosition = '0px -128px';
+            // thisDie.style.backgroundPosition = '0px -128px';
         }
         if (value == 6) {
-            thisDie.style.backgroundPosition = '-64px -128px';
+            // thisDie.style.backgroundPosition = '-64px -128px';
         }
     
         return (
