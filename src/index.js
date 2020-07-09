@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Link } from 'react-router-dom'
+
 import './index.css';
 import './App.css';
-import Navigation from './components/Navigation'
+
+// import Navigation from './components/Navigation'
 import ReactRouter from './router/ReactRouter'
 import * as serviceWorker from './serviceWorker';
 // const express = require ('express')
@@ -13,8 +16,17 @@ require ('dotenv').config();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Navigation />
-    <ReactRouter />
+    <Router>
+      <div className='navBar'>
+        <h1>Farkle!</h1>
+        <div className='buttons'>
+          <Link activeClassName="active" to="/">Home</Link>
+          <Link activeClassName="active" to="/login">Login</Link>
+          <Link activeClassName="active" to="/farkle">Play</Link>
+        </div>
+      </div>
+      <ReactRouter />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
