@@ -4,16 +4,16 @@ import React from 'react'
 const Navigation = () => {
 
 
-    // return (
-    //     <div>
-    //         <h1>Farkle!</h1>
-    //         <div className='buttons'>
-    //             <Link activeClassName="active" to="/">Home</Link>
-    //             <Link activeClassName="active" to="/login">Login</Link>
-    //             <Link activeClassName="active" to="/farkle">Play</Link>
-    //         </div>
-    //     </div>
-    // )
+    return (
+        <div>
+            <h1>Farkle!</h1>
+            <div className='buttons'>
+                <a activeClassName="active" href="/">Home</a>
+                <a activeClassName="active" href="/login">Login</a>
+                <a activeClassName="active" href="/farkle">Play</a>
+            </div>
+        </div>
+    )
 }
 
 export default Navigation

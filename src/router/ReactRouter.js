@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router'
 // import cookie from 'cookie'
 import Home from '../components/Home'
 import Login from '../components/Login'
-import Farkle from '../components/Farkle'
+// import Farkle from '../components/Farkle'
 
 const checkAuth = () => {
     // const cookies = cookie.parse(document.cookie)
