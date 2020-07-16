@@ -16,9 +16,9 @@ function Login(props) {
     }
 
     return (
-        <div className="loginForm forms">
+        <div className="signupForm forms">
             <form className="login-form" onSubmit={() => login()}>
-            <label for="username">Username</label>
+            <label for="username">Create Username</label>
             <input
                 onChange={e => setUsername(e.target.value)}
                 placeholder="Enter Username"
@@ -26,7 +26,7 @@ function Login(props) {
                 value={username}
                 type="text"
                 required />
-            <label for="password">Password</label>
+            <label for="password">Create Password</label>
             <input
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Enter Password"
@@ -39,7 +39,7 @@ function Login(props) {
                 className="button login-button"
                 value={loading ? 'Loading...' : 'Login'}
                 disabled={loading}
-                >Log In</button>
+                >Sign Up</button>
             </form>
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import {Router} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom'
 
 import './index.css';
 import './App.css';
@@ -15,13 +15,12 @@ import * as serviceWorker from './serviceWorker';
 // const bodyParser = require('body-parser');
 require ('dotenv').config();
 
-ReactDOM.render(<App />,
-  // <React.StrictMode>
-  //   <Router>
-  //     <Navigation />
-  //     <ReactRouter />
-  //   </Router>
-  // </React.StrictMode>,
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

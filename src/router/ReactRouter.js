@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router'
 // import cookie from 'cookie'
 import Home from '../components/Home'
 import Login from '../components/Login'
+import Signup from '../components/Signup'
 // import Farkle from '../components/Farkle'
 
 const checkAuth = () => {
@@ -27,6 +28,7 @@ const Router = () => {
         <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/login' component={Login} />
+            <Route path='/signup' component={Signup} />
             {/* <Route path='/business/:id' component={Business} /> */}
             {/* <ProtectedRoute path='/farkle' component={Farkle}/> */}
         </Switch>

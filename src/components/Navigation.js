@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Navigation = () => {
 
@@ -8,9 +8,9 @@ const Navigation = () => {
         <div>
             <h1>Farkle!</h1>
             <div className='buttons'>
-                <a activeClassName="active" href="/">Home</a>
-                <a activeClassName="active" href="/login">Login</a>
-                <a activeClassName="active" href="/farkle">Play</a>
+                <Link activeClassName="active" to="/">Home</Link>
+                <Link activeClassName="active" href="/login">Login</Link>
+                <Link activeClassName="active" href="/farkle">Play</Link>
             </div>
         </div>
     )
