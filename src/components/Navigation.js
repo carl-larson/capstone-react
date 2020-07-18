@@ -1,18 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import '../App.css'
 
 const Navigation = () => {
-    const displayButtons = (e) => {
-        e.preventDefault()
-        console.log("button pushed")
-        const buttons = document.getElementsByClassName('playButtons');
-        let dispButtons = buttons.style.display;
-        if (dispButtons === 'none') {
-            dispButtons = 'block';
-        } else if (dispButtons === 'block') {
-            dispButtons = 'none';
+    const [ playButtons, setPlayButtons ] = useState('none'); 
+    const displayButtons = () => {
+        if (playButtons === 'none') {
+            setPlayButtons('block');
+        } else if (playButtons === 'block') {
+            setPlayButtons('none');
         }
     }
 
@@ -25,7 +22,7 @@ const Navigation = () => {
                 <Link activeClassName="active" to="/signup"><button>Sign Up</button></Link>
                 <button onClick={displayButtons}>Play a Game</button>
             </div>
-            <div className="playButtons">
+            <div className="playButtons" style={{display: playButtons}}>
                 <Link to="/farkle">
                     <button>Farkle</button>
                 </Link>

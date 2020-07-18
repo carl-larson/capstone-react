@@ -6,7 +6,8 @@ function Login(props) {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     // const [ error, setError ] = useState(null);
-    const [ loading, setLoading ] = useState(null);
+    // const [ loading, setLoading ] = useState(null);
+    const loading = null;
 
     // const login = (e) => {
     // e.preventDefault();

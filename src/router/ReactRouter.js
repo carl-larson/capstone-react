@@ -1,27 +1,30 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router'
+// import { Switch, Route, Redirect } from 'react-router'
+import { Switch, Route } from 'react-router'
 // import cookie from 'cookie'
+
 import Home from '../components/Home'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
-// import Farkle from '../components/Farkle'
+import PlayerPage from '../components/PlayerPage'
+import Farkle from '../components/Farkle'
 
-const checkAuth = () => {
-    // const cookies = cookie.parse(document.cookie)
-    // return cookies["username"] ? true : false
-    return true;
-}
+// const checkAuth = () => {
+//     const cookies = cookie.parse(document.cookie)
+//     return cookies["username"] ? true : false
+//     return true;
+// }
 
-const ProtectedRoute = ({component: Component, ...rest}) => {
-    return (
-        <Route
-        {...rest}
-        render={(props) => checkAuth()
-            ? <Component {...props} />
-            : <Redirect to="/login" />}
-        />
-    )
-}
+// const ProtectedRoute = ({component: Component, ...rest}) => {
+//     return (
+//         <Route
+//         {...rest}
+//         render={(props) => checkAuth()
+//             ? <Component {...props} />
+//             : <Redirect to="/login" />}
+//         />
+//     )
+// }
 
 const Router = () => {
     return(
@@ -29,7 +32,8 @@ const Router = () => {
             <Route exact path='/' component={Home} />
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
-            {/* <Route path='/business/:id' component={Business} /> */}
+            <Route path='/playerpage' component={PlayerPage} />
+            <Route path='/farkle' component={Farkle} />
             {/* <ProtectedRoute path='/farkle' component={Farkle}/> */}
         </Switch>
     )
