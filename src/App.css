@@ -30,3 +30,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+.playButtons {
+  display: none;
+}

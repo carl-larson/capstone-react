@@ -8,16 +8,16 @@ function Login(props) {
     // const [ error, setError ] = useState(null);
     const [ loading, setLoading ] = useState(null);
 
-    const login = (e) => {
-    e.preventDefault();
-    props.history.push('/');
+    // const login = (e) => {
+    // e.preventDefault();
+    // props.history.push('/');
     // document.cookie = `loggedIn=true;max-age=60*1000`;
     // document.cookie += 'username='+this.state.username+';max-age=60*1000';
-    }
+    // }
 
     return (
         <div className="signupForm forms">
-            <form className="login-form" onSubmit={() => login()}>
+            <form className="login-form" action="/auth/signup" method="post">
             <label for="username">Create Username</label>
             <input
                 onChange={e => setUsername(e.target.value)}

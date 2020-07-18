@@ -8,16 +8,34 @@ function Login(props) {
     // const [ error, setError ] = useState(null);
     const [ loading, setLoading ] = useState(null);
 
-    const login = (e) => {
-    e.preventDefault();
-    props.history.push('/');
-    // document.cookie = `loggedIn=true;max-age=60*1000`;
-    // document.cookie += 'username='+this.state.username+';max-age=60*1000';
-    }
+    // const login = (e) => {
+    //     e.preventDefault();
+    //     const userData = {
+    //         username: username,
+    //         password: password
+    //     }
+    //     console.log("Login information:");
+    //     console.log(userData);
+    //     fetch('../auth/login', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(userData),
+    //         })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log('Success:', userData.username);
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error:', error);
+    //     });
+    // }
 
     return (
         <div className="loginForm forms">
-            <form className="login-form" onSubmit={() => login()}>
+            {/* <form className="login-form" onSubmit={() => login()}> */}
+            <form className="login-form" action="/auth/login" method="post">
             <label for="username">Username</label>
             <input
                 onChange={e => setUsername(e.target.value)}
