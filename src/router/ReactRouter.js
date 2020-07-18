@@ -7,7 +7,7 @@ import Home from '../components/Home'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
 import PlayerPage from '../components/PlayerPage'
-import Farkle from '../components/Farkle'
+import Farkle from '../components//farkle/Farkle'
 
 // const checkAuth = () => {
 //     const cookies = cookie.parse(document.cookie)

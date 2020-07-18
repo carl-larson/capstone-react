@@ -1,6 +1,8 @@
 import React from 'react';
 import Row from './Row'
 
+import 'farkleStyle.css'
+
 class Farkle extends React.Component {
     constructor (props) {
         super(props);
