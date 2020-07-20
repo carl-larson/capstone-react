@@ -42,25 +42,49 @@ class Farkle extends React.Component {
             
         }
     }
+    select = (e) => {
+        console.log('clicked')
+        let selectDie = this.state.dice[e];
+        console.log (e)
+        if (selectDie.kept === false) {
+            return selectDie.selected ? false : true;
+        } else {
+            return;
+        }
+    }
     rollDice = () => {
         let newRoll = 0;
-        this.state.dice.map((die, ind) => {
+        // console.log(state.dice)
+        const newDice = this.state.dice.map(die => {
             if(die.selected === false) {
                 newRoll = Math.ceil(Math.random()*6);
-                console.log(newRoll);
-            } else {
-                newRoll = die.value;
-                die.kept = true;
+                // console.log('new roll', newRoll);
+                die = {...die, value: newRoll};
+            // } else {
+            //     // newRoll = die.value;
+            //     die = {...die, kept: true};
             }
-            console.log('die value', die.value)
-            return die.value = newRoll;
         })
+        // console.log(dice);
+        this.setState({dice: newDice});
+        // let newRoll = 0;
+        // this.state.dice.map((die, ind) => {
+            // if(die.selected === false) {
+            //     newRoll = Math.ceil(Math.random()*6);
+            //     console.log(newRoll);
+            // } else {
+            //     newRoll = die.value;
+            //     die.kept = true;
+            // }
+        //     console.log('die value', die.value)
+        //     return this.setState({value: newRoll});
+        // })
     }
     render() {
         let die = this.state.dice;
         return (
             <div className='board'>
-                <Row className='row1' value={die[0].value} selected={die[0].selected} kept={die[0].kept}></Row>
+                <Row className='row1' onClick={this.select} value={die[0].value} selected={die[0].selected} kept={die[0].kept}></Row>
                 <Row className='row2' value={die[1].value} selected={die[1].selected} kept={die[1].kept}></Row>
                 <Row className='row3' value={die[2].value} selected={die[2].selected} kept={die[2].kept}></Row>
                 <Row className='row4' value={die[3].value} selected={die[3].selected} kept={die[3].kept}></Row>
