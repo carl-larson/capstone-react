@@ -18,17 +18,32 @@ class Row extends React.Component {
         let xRolledPosition = 0;
         let xKeptPosition = -64;
         let yPosition = -((value - 1) * 64);
+        
+        let selectedcolor = 'gray';
+        let keptcolor = 'gray';
+        // selected ? bordercolor = 'red' : bordercolor = 'gray';
+        if (selected && !kept) {
+            selectedcolor = 'red';
+        } else if (selected && kept) {
+            selectedcolor = 'gray';
+            keptcolor = 'red';
+            xRolledPosition = -64;
+            xKeptPosition = 0;
+        } else {
+            selectedcolor = 'gray';
+            keptcolor = 'gray';
+            xRolledPosition = 0;
+            xKeptPosition = -64;
+        }
         let rolledPosition = `${xRolledPosition}px ${yPosition}px`;
         let keptPosition = `${xKeptPosition}px ${yPosition}px`;
-        let bordercolor = 'gray';
-        selected ? bordercolor = 'red' : bordercolor = 'gray';
-    
+
         return (
             <div className='row'>
                 <div className='rolled dice'
-                    style={{backgroundPosition: rolledPosition, borderColor: bordercolor}}>
+                    style={{backgroundPosition: rolledPosition, borderColor: selectedcolor}}>
                 </div>
-                <div className='kept dice' style={{backgroundPosition: keptPosition}}>
+                <div className='kept dice' style={{backgroundPosition: keptPosition, borderColor: keptcolor}}>
                 </div>
             </div>
         )
