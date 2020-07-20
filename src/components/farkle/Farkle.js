@@ -1,5 +1,6 @@
 import React from 'react';
 import Row from './Row';
+import ScoreBoard from './ScoreBoard'
 
 import './farkleStyle.css';
 
@@ -7,6 +8,7 @@ class Farkle extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+            playing: false,
             dice: [
                 {
                     value: 1,
@@ -25,7 +27,7 @@ class Farkle extends React.Component {
                 },
                 {
                     value: 4,
-                    selected: true,
+                    selected: false,
                     kept: false
                 },
                 {
@@ -43,20 +45,23 @@ class Farkle extends React.Component {
         this.select = this.select.bind(this);
     }
     select(ind) {
-        console.log('clicked')
-        let diceList = [...this.state.dice];
-        let selectDie = diceList[ind];
-        // console.log (e)
-        if (selectDie.kept === false) {
-            selectDie.selected ? selectDie.selected = false : selectDie.selected = true;
-            // diceList = [...diceList, selectDie];
-            
-        } else {
-            return;
-        }
-        this.setState({dice: diceList})
+        if(this.state.playing) {
+            console.log('clicked')
+            let diceList = [...this.state.dice];
+            let selectDie = diceList[ind];
+            // console.log (e)
+            if (selectDie.kept === false) {
+                selectDie.selected ? selectDie.selected = false : selectDie.selected = true;
+                // diceList = [...diceList, selectDie];
+                
+            } else {
+                return;
+            }
+            this.setState({dice: diceList})
+        } else {return}
     }
     rollDice = () => {
+        this.setState({playing: true})
         let newRoll = 0;
         let diceArray = [...this.state.dice];
         console.log(diceArray);
@@ -101,14 +106,17 @@ class Farkle extends React.Component {
         let die = this.state.dice;
         return (
             <div className='board'>
-                {/* <button onClick={() => this.select(0)}><Row className='row1' value={die[0].value} selected={die[0].selected} kept={die[0].kept}></Row></button> */}
-                <div onClick={() => this.select(0)}><Row className='row1' value={die[0].value} selected={die[0].selected} kept={die[0].kept}></Row></div>
-                <div onClick={() => this.select(1)}><Row className='row2' value={die[1].value} selected={die[1].selected} kept={die[1].kept}></Row></div>
-                <div onClick={() => this.select(2)}><Row className='row3' value={die[2].value} selected={die[2].selected} kept={die[2].kept}></Row></div>
-                <div onClick={() => this.select(3)}><Row className='row4' value={die[3].value} selected={die[3].selected} kept={die[3].kept}></Row></div>
-                <div onClick={() => this.select(4)}><Row className='row5' value={die[4].value} selected={die[4].selected} kept={die[4].kept}></Row></div>
-                <div onClick={() => this.select(5)}><Row className='row6' value={die[5].value} selected={die[5].selected} kept={die[5].kept}></Row></div>
+                <ScoreBoard />
                 <button onClick={this.rollDice}>Roll!</button>
+                <div className='diceBoard'>
+                    <div onClick={() => this.select(0)}><Row className='row1' value={die[0].value} selected={die[0].selected} kept={die[0].kept}></Row></div>
+                    <div onClick={() => this.select(1)}><Row className='row2' value={die[1].value} selected={die[1].selected} kept={die[1].kept}></Row></div>
+                    <div onClick={() => this.select(2)}><Row className='row3' value={die[2].value} selected={die[2].selected} kept={die[2].kept}></Row></div>
+                    <div onClick={() => this.select(3)}><Row className='row4' value={die[3].value} selected={die[3].selected} kept={die[3].kept}></Row></div>
+                    <div onClick={() => this.select(4)}><Row className='row5' value={die[4].value} selected={die[4].selected} kept={die[4].kept}></Row></div>
+                    <div onClick={() => this.select(5)}><Row className='row6' value={die[5].value} selected={die[5].selected} kept={die[5].kept}></Row></div>
+                </div>
+                
             </div>
 
         )

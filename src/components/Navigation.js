@@ -17,9 +17,9 @@ const Navigation = () => {
         <div>
             <h1>Farkle!</h1>
             <div className='buttons'>
-                <Link activeClassName="active" to="/"><button>Home</button></Link>
-                <Link activeClassName="active" to="/login"><button>Log In</button></Link>
-                <Link activeClassName="active" to="/signup"><button>Sign Up</button></Link>
+                <Link activeclassname="active" to="/"><button>Home</button></Link>
+                <Link activeclassname="active" to="/login"><button>Log In</button></Link>
+                <Link activeclassname="active" to="/signup"><button>Sign Up</button></Link>
                 <button onClick={displayButtons}>Play a Game</button>
             </div>
             <div className="playButtons" style={{display: playButtons}}>
