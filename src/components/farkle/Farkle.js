@@ -54,19 +54,29 @@ class Farkle extends React.Component {
     }
     rollDice = () => {
         let newRoll = 0;
-        // console.log(state.dice)
-        const newDice = this.state.dice.map(die => {
-            if(die.selected === false) {
+        let diceArray = [...this.state.dice];
+        console.log(diceArray);
+        for (let i = 0; i < 6; i++) {
+            if (diceArray[i].selected === false) {
                 newRoll = Math.ceil(Math.random()*6);
-                // console.log('new roll', newRoll);
-                die = {...die, value: newRoll};
-            // } else {
-            //     // newRoll = die.value;
-            //     die = {...die, kept: true};
+                diceArray[i].value = newRoll;
             }
-        })
+        }
+        this.setState({dice: diceArray});
+
+        //METHOD 2
+        // const newDice = this.state.dice.map(die => {
+        //     if(die.selected === false) {
+        //         newRoll = Math.ceil(Math.random()*6);
+        //         die = {...die, value: newRoll};
+        //     } else {
+        //         die = {...die, kept: true};
+        //     }
+        // })
         // console.log(dice);
-        this.setState({dice: newDice});
+        // this.setState({dice: newDice});
+
+        //METHOD 1
         // let newRoll = 0;
         // this.state.dice.map((die, ind) => {
             // if(die.selected === false) {
@@ -80,6 +90,12 @@ class Farkle extends React.Component {
         //     return this.setState({value: newRoll});
         // })
     }
+    
+    updateDice = () => {
+        let diceList = this.rollDice;
+        this.setState({dice: diceList});
+    }
+
     render() {
         let die = this.state.dice;
         return (
