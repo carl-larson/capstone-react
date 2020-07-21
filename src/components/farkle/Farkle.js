@@ -8,7 +8,9 @@ class Farkle extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+            points: 0,
             playing: false,
+            message: 'Roll dice to begin!',
             dice: [
                 {
                     value: 1,
@@ -43,25 +45,86 @@ class Farkle extends React.Component {
             ]
         };
         this.select = this.select.bind(this);
+        this.sortDice = this.sortDice.bind(this);
+        this.updatePoints = this.updatePoints.bind(this);
+        this.updateScore = this.updateScore.bind(this);
+
+        this.selectedDice = [];
+        // this.points = 0;
+        this.score = 0;
     }
+    sortDice(ind) {
+        if (this.state.dice[ind].selected === true && this.state.dice[ind].kept === false) {
+            this.selectedDice.push(this.state.dice[ind].value);
+        }
+        if (this.state.dice[ind].selected === false && this.state.dice[ind].kept === false) {
+            const removeIndex = this.selectedDice.indexOf(this.state.dice[ind].value);
+            if (removeIndex > -1) {
+                this.selectedDice.splice(removeIndex, 1);
+            }
+        }
+        
+        this.selectedDice.sort();
+        console.log("selected dice: ", this.selectedDice)
+    }
+
+    updatePoints() {
+        let dice = this.selectedDice.join('');
+        console.log('original dice string: ', dice)
+        let diceLength = dice.length;
+        let points = 0;
+        let combos = [{values: '1', worth: 100}, {values: '5', worth: 50}];
+        let index = dice.search(combos[0].values);
+        
+        for(let i = 0; i < diceLength; i++) {
+            if (index !== -1) {
+                points += combos[0].worth;
+                dice.replace(combos[0].values, '');
+                console.log('new dice string: ', dice)
+            }
+        }
+        
+        // search = [1];
+        // index
+        
+        console.log('new dice string: ', dice)
+        console.log('search for: ', combos[0].values, index)
+        this.setState({points: points});
+        return;
+    }
+
+    updateScore() {
+        return
+    }
+
+    // componentDidUpdate(prevProps, prevState) {
+    //         console.log("component update");
+    //     // This will keep the points current until they are committed to the score.
+    //         if(this.state !== prevState){this.updatePoints()};
+    //         return;
+    // }
+
     select(ind) {
         if(this.state.playing) {
-            console.log('clicked')
+            console.log('clicked');
             let diceList = [...this.state.dice];
             let selectDie = diceList[ind];
             // console.log (e)
             if (selectDie.kept === false) {
                 selectDie.selected ? selectDie.selected = false : selectDie.selected = true;
                 // diceList = [...diceList, selectDie];
-                
+                this.sortDice(ind);
             } else {
                 return;
             }
-            this.setState({dice: diceList})
+            this.setState({dice: diceList});
+            this.updatePoints();
         } else {return}
     }
+
     rollDice = () => {
         this.setState({playing: true})
+        
         let newRoll = 0;
         let diceArray = [...this.state.dice];
         console.log(diceArray);
@@ -73,7 +136,9 @@ class Farkle extends React.Component {
                 diceArray[i].kept = true;
             }
         }
-        this.setState({dice: diceArray});
+        this.setState({dice: diceArray, message: 'Select dice to keep or score and pass.'});
+        this.selectedDice = [];
+        this.points = 0;
 
         //METHOD 2
         // const newDice = this.state.dice.map(die => {
@@ -101,13 +166,18 @@ class Farkle extends React.Component {
         //     return this.setState({value: newRoll});
         // })
     }
-
+    scorePass = () => {
+        return
+    }
     render() {
         let die = this.state.dice;
         return (
             <div className='board'>
-                <ScoreBoard />
-                <button onClick={this.rollDice}>Roll!</button>
+                <ScoreBoard message={this.state.message} points={this.state.points} score={this.score}/>
+                <div  className='diceButtons'>
+                    <button onClick={this.rollDice}>Roll!</button>
+                    <button onClick={this.scorePass}>Score and Pass</button>
+                </div>
                 <div className='diceBoard'>
                     <div onClick={() => this.select(0)}><Row className='row1' value={die[0].value} selected={die[0].selected} kept={die[0].kept}></Row></div>
                     <div onClick={() => this.select(1)}><Row className='row2' value={die[1].value} selected={die[1].selected} kept={die[1].kept}></Row></div>

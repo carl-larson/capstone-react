@@ -14,7 +14,7 @@ class Row extends React.Component {
         let value = this.props.value;
         let selected = this.props.selected;
         let kept = this.props.kept;
-        console.log(value, selected, kept)
+        // console.log(value, selected, kept)
         let xRolledPosition = 0;
         let xKeptPosition = -64;
         let yPosition = -((value - 1) * 64);
