@@ -10,6 +10,8 @@ class Farkle extends React.Component {
         this.state = {
             points: 0,
             playing: false,
+            mustRoll: true,
+            mustKeep: false,
             message: 'Roll dice to begin!',
             dice: [
                 {
@@ -48,6 +50,7 @@ class Farkle extends React.Component {
         this.sortDice = this.sortDice.bind(this);
         this.updatePoints = this.updatePoints.bind(this);
         this.updateScore = this.updateScore.bind(this);
+        this.recursiveCounting = this.recursiveCounting.bind(this);
 
         this.selectedDice = [];
         // this.points = 0;
@@ -68,25 +71,45 @@ class Farkle extends React.Component {
         console.log("selected dice: ", this.selectedDice)
     }
 
+    recursiveCounting(dice, points) {
+        console.log(dice)
+        let dice1 = dice;
+        let dice2 = '';
+        let combos = [{values:'123456', worth: 1500},
+            {values:'666666', worth: 3000},{values:'555555', worth: 3000},{values:'444444', worth: 3000},{values:'333333', worth: 3000},{values:'222222', worth: 3000},{values:'111111', worth: 3000},
+            {values:'66666', worth: 2000},{values:'55555', worth: 2000},{values:'44444', worth: 2000},{values:'33333', worth: 2000},{values:'22222', worth: 2000},{values:'11111', worth: 2000},
+            {values:'6666', worth: 1000},{values:'5555', worth: 1000},{values:'4444', worth: 1000},{values:'3333', worth: 1000},{values:'2222', worth: 1000},{values:'1111', worth: 1100},
+            {values:'666', worth: 600},{values:'555', worth: 500},{values:'444', worth: 400},{values:'333', worth: 300},{values:'222', worth: 200},{values:'111', worth: 1000},
+            {values: '11', worth: 200},{values: '55', worth: 100},{values: '1', worth: 100},{values: '5', worth: 50}];
+        // let index = dice.search(combos[i].values);
+        
+        for(let i = 0; i < combos.length; i++) {
+            if (dice1.indexOf(combos[i].values) !== -1) {
+                points += combos[i].worth;
+                dice2 = dice1.replace(combos[i].values, '');
+                console.log('new dice string: ', dice2)
+            }
+        }
+
+        if (dice1 === dice2) {
+            return points;
+        } else {
+            this.recursiveCounting(dice2, points)
+            return points;
+        }
+
+        // console.log('new dice string: ', dice)
+        // console.log('search for: ', combos[0].values, index)
+        // return points;
+    }
+
     updatePoints() {
         let dice = this.selectedDice.join('');
         console.log('original dice string: ', dice)
-        let diceLength = dice.length;
+        // let diceLength = dice.length;
         let points = 0;
-        let combos = [{values: '1', worth: 100}, {values: '5', worth: 50}];
-        let index = dice.search(combos[0].values);
-        
-        for(let i = 0; i < diceLength; i++) {
-            if (dice.search(combos[0].values) !== -1) {
-                points += combos[0].worth;
-                dice = dice.replace(combos[0].values, '');
-                console.log('new dice string: ', dice)
-            }
-        }
-        
-        console.log('new dice string: ', dice)
-        console.log('search for: ', combos[0].values, index)
-        this.setState({points: points});
+        let returnedPoints = this.recursiveCounting(dice, points);
+        this.setState({points: returnedPoints});
         return;
     }
 
@@ -201,6 +224,7 @@ class Farkle extends React.Component {
                 <ScoreBoard message={this.state.message} points={this.state.points} score={this.score}/>
                 <div  className='diceButtons'>
                     <button onClick={this.rollDice}>Roll!</button>
+                    <button onClick={this.updateScore}>Keep Points</button>
                     <button onClick={this.scorePass}>Score and Pass</button>
                 </div>
                 <div className='diceBoard'>
