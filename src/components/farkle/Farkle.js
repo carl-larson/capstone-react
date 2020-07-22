@@ -77,15 +77,12 @@ class Farkle extends React.Component {
         let index = dice.search(combos[0].values);
         
         for(let i = 0; i < diceLength; i++) {
-            if (index !== -1) {
+            if (dice.search(combos[0].values) !== -1) {
                 points += combos[0].worth;
-                dice.replace(combos[0].values, '');
+                dice = dice.replace(combos[0].values, '');
                 console.log('new dice string: ', dice)
             }
         }
-        
-        // search = [1];
-        // index
         
         console.log('new dice string: ', dice)
         console.log('search for: ', combos[0].values, index)
@@ -123,22 +120,50 @@ class Farkle extends React.Component {
     }
 
     rollDice = () => {
+        //**Perhaps these first updates should be in their own method instead of roll dice.
+        //Begins the game
         this.setState({playing: true})
+        //Move selected points to kept points and reset selected points to zero
+        this.score += this.state.points;
+        this.setState({points: 0});
+
+        //Empty the selected dice array to begin new round of selections
+        this.selectedDice = [];
         
         let newRoll = 0;
         let diceArray = [...this.state.dice];
         console.log(diceArray);
+        let keptCount = 0;
+        
+        //Finally get to rolling new numbers on all non-selected non-kept dice.
+        //Make a new dice array to mutate
+        //If die is selected, update to kept = true.
         for (let i = 0; i < 6; i++) {
             if (diceArray[i].selected === false) {
                 newRoll = Math.ceil(Math.random()*6);
                 diceArray[i].value = newRoll;
+            } else if (diceArray[i].kept === true) {
+                //check if all dice are in the kept column
+                keptCount += 1;
+                console.log(keptCount)
             } else {
                 diceArray[i].kept = true;
             }
+            
         }
+        //if all dice are in the kept column, unselect and unkeep and reroll all dice
+        if (keptCount === 6) {
+            for (let j = 0; j < 6; j++) {
+                diceArray[j].selected = false;
+                diceArray[j].kept = false;
+            }
+            keptCount = 0;
+            this.rollDice();
+        }
+        
+        //Set state dice array to the new values and update the message after the game begins
         this.setState({dice: diceArray, message: 'Select dice to keep or score and pass.'});
-        this.selectedDice = [];
-        this.points = 0;
+        
 
         //METHOD 2
         // const newDice = this.state.dice.map(die => {
