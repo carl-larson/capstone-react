@@ -46,24 +46,58 @@ class Farkle extends React.Component {
                 }
             ]
         };
+        this.comboSearch = this.comboSearch.bind(this);
+        this.checkForCombos = this.checkForCombos.bind(this);
+        this.rollDice = this.rollDice.bind(this);
         this.select = this.select.bind(this);
         this.sortDice = this.sortDice.bind(this);
         this.updatePoints = this.updatePoints.bind(this);
         this.keepAndUpdateScore = this.keepAndUpdateScore.bind(this);
         this.recursiveCounting = this.recursiveCounting.bind(this);
+        this.scorePass = this.scorePass.bind(this);
 
         this.selectedDice = [];
         this.score = 0;
         // this.keptCount = 0;
-        this.combos = [{values:'123456', worth: 1500},
+        this.combos = [{values:'123456', worth: 1500},{values: '11', worth: 100},{values: '55', worth: 50},{values: '1', worth: 100},{values: '5', worth: 50},
         {values:'666666', worth: 3000},{values:'555555', worth: 3000},{values:'444444', worth: 3000},{values:'333333', worth: 3000},{values:'222222', worth: 3000},{values:'111111', worth: 3000},
         {values:'66666', worth: 2000},{values:'55555', worth: 2000},{values:'44444', worth: 2000},{values:'33333', worth: 2000},{values:'22222', worth: 2000},{values:'11111', worth: 2000},
         {values:'6666', worth: 1000},{values:'5555', worth: 1000},{values:'4444', worth: 1000},{values:'3333', worth: 1000},{values:'2222', worth: 1000},{values:'1111', worth: 1100},
-        {values:'666', worth: 600},{values:'555', worth: 400},{values:'444', worth: 400},{values:'333', worth: 300},{values:'222', worth: 200},{values:'111', worth: 800},
-        {values: '11', worth: 100},{values: '55', worth: 50},{values: '1', worth: 100},{values: '5', worth: 50}];
+        {values:'666', worth: 600},{values:'555', worth: 400},{values:'444', worth: 400},{values:'333', worth: 300},{values:'222', worth: 200},{values:'111', worth: 800}
+        ];
     }
     
+    comboSearch(comboSearchString) {
+        let comboSearchResults = false;
+        let i = 0;
+        // for(let i = 0; i < this.combos.length; i++) {
+        while (comboSearchResults === false && i < this.combos.length) {
+            if (comboSearchString.indexOf(this.combos[i].values) !== -1) {
+                comboSearchResults = true;
+            }
+            i++;
+        }
+        return comboSearchResults;
+    }
 
+    checkForCombos() {
+        let comboSearch = [];
+        for (let i = 0; i < 6; i++) {
+            if (this.state.dice[i].kept === false) {
+                comboSearch.push(this.state.dice[i].value)
+            }
+        }
+        let comboSearchString = comboSearch.join('');
+        let comboSearchResults = this.comboSearch(comboSearchString);
+        if (comboSearchResults === true) {
+            console.log('Found combo')
+        } else {
+            console.log('No combo found')
+            this.setState({message: 'Bust!', mustKeep: true, mustRoll: true})
+            
+        }
+        return;
+    }
 //LOOPS THROUGH THE THIS.COMBOS ARRAY TO COMPARE SELECTED DICE WITH SCORING COMBO OPTIONS,
 //RECEIVES SELECTED DICE IN STRING FORM, RETURNS POINTS
     recursiveCounting(dice, points) {
@@ -103,7 +137,7 @@ class Farkle extends React.Component {
     keepAndUpdateScore() {
         //Move selected points to kept points and reset selected points to zero
         this.score += this.state.points;
-        this.setState({points: 0});
+        this.setState({mustKeep: false, mustRoll: true, points: 0});
         //Empty the selected dice array to begin new round of selections
         this.selectedDice = [];
         let keptCount = 0;
@@ -155,7 +189,7 @@ class Farkle extends React.Component {
 // THIS METHOD IS FOR CHANGING THE selected STATUS OF THE DICE WHEN CLICKED
 // AND CALLS THE sortDice METHOD TO ARRANGE THE selectedDice ARRAY
     select(ind) {
-        if(this.state.playing) {
+        if(this.state.playing && this.state.mustKeep) {
             console.log('clicked');
             let diceList = [...this.state.dice];
             let selectDie = diceList[ind];
@@ -172,17 +206,17 @@ class Farkle extends React.Component {
         } else {return}
     }
 
-    rollDice = () => {
+    rollDice() {
         //Begins the game
-        this.setState({playing: true})
+        this.setState({playing: true, mustKeep: true, mustRoll: false})
         
         //Keep all selected dice and move selected points to kept score (calls same method that the keep button does)
         //Returns kept count
-        let keptCount = this.keepAndUpdateScore();
+        let keptCount = 0;
 
         let newRoll = 0;
         //Make a new dice array to mutate
-        let diceArray = [...this.state.dice];
+        let diceArray = this.state.dice;
         // console.log(diceArray);
         
         //Roll new numbers on all non-selected non-kept dice.
@@ -191,6 +225,11 @@ class Farkle extends React.Component {
             if (diceArray[i].selected === false) {
                 newRoll = Math.ceil(Math.random()*6);
                 diceArray[i].value = newRoll;
+            }
+            if (diceArray[i].kept === true) {
+                //checking if all dice are in the kept column
+                keptCount += 1;
+                console.log(keptCount)
             }
         }
         //if all dice are in the kept column, unselect and unkeep and reroll all dice
@@ -205,10 +244,10 @@ class Farkle extends React.Component {
         
         //Set state dice array to the new values and update the message after the game begins
         this.setState({dice: diceArray, message: 'Select dice to keep or score and pass.'});
-        
+        this.checkForCombos();
     }
 
-    scorePass = () => {
+    scorePass() {
         return
     }
 
@@ -218,8 +257,8 @@ class Farkle extends React.Component {
             <div className='board'>
                 <ScoreBoard message={this.state.message} points={this.state.points} score={this.score}/>
                 <div  className='diceButtons'>
-                    <button onClick={this.rollDice}>Roll!</button>
-                    <button onClick={this.keepAndUpdateScore}>Keep Points</button>
+                    <button onClick={this.rollDice} disabled={this.state.mustKeep}>Roll!</button>
+                    <button onClick={this.keepAndUpdateScore} disabled={this.state.mustRoll}>Keep Points</button>
                     <button onClick={this.scorePass}>Score and Pass</button>
                 </div>
                 <div className='diceBoard'>
