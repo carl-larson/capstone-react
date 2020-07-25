@@ -18,6 +18,17 @@
   align-items: center;
 }
 
+.navButton {
+  margin: 5px;
+  text-decoration: none;
+  
+}
+
+.navButton :hover {
+  color: red;
+  border: 2px solid green;
+}
+
 .playButtons {
   display: none;
 }

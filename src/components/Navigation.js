@@ -17,17 +17,17 @@ const Navigation = () => {
         <div>
             <h1>Farkle!</h1>
             <div className='buttons'>
-                <Link activeclassname="active" to="/"><button>Home</button></Link>
-                <Link activeclassname="active" to="/login"><button>Log In</button></Link>
-                <Link activeclassname="active" to="/signup"><button>Sign Up</button></Link>
+                <Link className="navButton" to="/">Home</Link>
+                <Link className="navButton" to="/login">Log In</Link>
+                <Link className="navButton" to="/signup">Sign Up</Link>
                 <button onClick={displayButtons}>Play a Game</button>
             </div>
             <div className="playButtons" style={{display: playButtons}}>
-                <Link to="/farkle">
-                    <button>Farkle</button>
+                <Link className="navButton" to="/farkle">
+                    Farkle
                 </Link>
-                <Link to="/playerpage">
-                    <button>Players</button>
+                <Link className="navButton" to="/playerpage">
+                    Players
                 </Link>
             </div>
         </div>
